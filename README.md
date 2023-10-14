@@ -1,1 +1,1 @@
-# vibitfy-spotifyclone
+# vibify-spotifyclone
