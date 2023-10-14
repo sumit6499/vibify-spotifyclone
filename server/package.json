@@ -1,0 +1,11 @@
+{
+  "name": "vibify-backend",
+  "version": "1.0.0",
+  "description": "This is backend of vibify webapp stack(MERN)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sumit Padalkar",
+  "license": "ISC"
+}
