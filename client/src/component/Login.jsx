@@ -1,41 +1,58 @@
-import React from "react";
-import {logo,google,facebook,apple} from '../assets';
-
-
-
-
-
+import React, {useState } from "react";
+import { FormField } from "./index";
+import {google,facebook,apple,eye,closeEye} from '../assets';
+import { Link } from "react-router-dom";
 
 export default function Login(){
+  const [showPass,setShowPass]=useState(false);
+  const [formData,setFormData]=useState(
+    {
+      email:'',
+      password:'',
+    }
+  );
 
-   
+  
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    console.log(formData)
     
+  }
+  
+  const handleChange=(e)=>{
+    setFormData({...formData,[e.target.name]:e.target.value})
+  }
+
+  
+  const clickToShowPass=(e)=>{
+    e.preventDefault();
+    setShowPass((prev)=>{
+      if(!prev)
+        return true;
+    })
+  }
+
+
     return(
       <>
-      
-      <header  className="flex w-full bg-[#000000] items-center py-2 pl-2 ">
-          <img src={logo} alt="" className="w-10 object-contain   "/>
-          <span className="text-lg font-medium tracking-wide ml-1 ">Vibify</span>
-      </header>
-
       <section className="sm:p-8 sm:mt-8 ">
         <div className="login flex justify-center items-center ">
           <div className="login__social flex items-center  bg-[#000000]  sm:max-w-[500px] sm:rounded-lg w-full  flex-col pb-8">
             <p className="p-8 text-3xl font-medium tracking-tight ">Log in to Vibify
             </p>
-            <button className="border-white border-[0.8px] hover:border-2  rounded-3xl py-1 px-8 m-1 ">
-              <img src={google} alt='google' className="inline-block w-8"/>
+            <button className="border-white border-[0.8px] hover:border-[1.5px]  rounded-3xl py-1 px-8 m-1 ">
+              <img src={google} alt='google' className="inline-block w-6  "/>
               <span className="m-6">Continue with Google </span>
             </button>
-            <button className="border-white border-[0.8px] hover:border-2  rounded-3xl py-1 px-6 m-1 ">
-              <img src={facebook} alt='facebook' className="inline-block w-8 "/>
+            <button className="border-white  border-[0.8px] hover:border-[1.5px]  rounded-3xl py-1 px-6 m-1 ">
+              <img src={facebook} alt='facebook' className="inline-block w-6 "/>
               <span className="m-6">Continue with Facebook </span>
             </button>
-            <button className="border-white border-[0.8px] hover:border-2  rounded-3xl py-1 px-[36px] m-1 ">
-              <img src={apple} alt='apple' className="inline-block w-8"/>
+            <button className="border-white border-[0.8px] hover:border-[1.5px]  rounded-3xl py-1 px-[36px] m-1 ">
+              <img src={apple} alt='apple' className="inline-block w-6 filter brightness-200"/>
               <span className="m-6">Continue with Apple</span>
             </button>
-            <button className="border-white border-[0.8px] hover:border-2  rounded-3xl py-2 px-6 m-1 ">
+            <button className="border-white border-[0.8px] hover:border-[1.5px]  rounded-3xl py-2 px-4 m-1 ">
               <span className="m-6">Continue with phone number</span>
             </button>
 
@@ -43,23 +60,51 @@ export default function Login(){
             <div className="login-form">
 
             <form action="post " className="flex flex-col justify-start  ">
-              <label htmlFor="email">
-                Email or username
-              </label>
-              <input type="text" name="email" placeholder="Email or username" className=" border-white  hover:shadow border shadow-[#878787] py-2 px-3 placeholder:absolute placeholder:left-3 rounded-sm bg-[#121212]"/>
-              <label htmlFor="email" className="mt-4">
-                Password
-              </label>
-              <input type="text" name="email" placeholder="Password" className=" border-white  hover:shadow border shadow-[#878787] py-2 px-12 placeholder:absolute placeholder:left-3 rounded-sm bg-[#121212]"/>
+            <label htmlFor={'email'} className="mt-4 ">
+              Email or username
+            </label>
+              <FormField  
+              type="text" 
+              name="email" 
+              id="email"
+              placeholder="Email or username" 
+              handleChange={handleChange}
+              />
+             
+             <label htmlFor={'password'} className="mt-4 ">
+              Password
+            </label>
 
-              <button type="submit" className="mt-8 bg-[#1ed760] py-2 rounded-2xl text-[#000000] font-bold hover:font-extrabold hover:scale-x-105">Log In</button>
+              <FormField 
+              type={showPass?'text':'password'} 
+              id="password" 
+              name="password"
+              placeholder="Password"
+              handleChange={handleChange}
+              />
+
+              <img src={showPass?eye:closeEye} alt="" className=" w-6 translate-x-60 translate-y-[-30px]  cursor-pointer  invert" onClick={clickToShowPass}/>
+
+              <button type="submit"className="mt-6 bg-[#1ed760] py-2 rounded-2xl text-[#000000] font-bold hover:font-extrabold hover:scale-x-105" onClick={handleSubmit} >Log In</button>
             </form>
-            <p className="mt-4 text-center underline ">Forgot your password?</p>
+
+
+            <p className="mt-4 text-center underline  cursor-pointer hover:text-[#1ed760]">
+              <Link to={'/password-reset'}> 
+              Forgot your password?
+              </Link>
+            </p>
             </div>
+
             <hr className="w-[80%] m-6 border-t-[#292929] rounded-full "/>
-            <span className="text-[#292929] ">Don't have an account?</span>
-            <span className="underline">Sign up for Vibify</span>
+
+
+            <span className="text-[#292929]">Don't have an account?</span>
+            <span className="underline cursor-pointer hover:text-[#1ed760]">Sign up for Vibify</span>
+
+
           </div>
+
         </div>
       </section>
       </>
