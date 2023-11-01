@@ -1,10 +1,13 @@
 import React, {useState } from "react";
 import { FormField } from "./index";
+import {emailValidation,passValidation} from '../utils';
 import {google,facebook,apple,eye,closeEye} from '../assets';
 import { Link } from "react-router-dom";
 
 export default function Login(){
   const [showPass,setShowPass]=useState(false);
+  const [emailWarn,setEmailWarn]=useState(false);
+  const [passWarn,setPassWarn]=useState(false);
   const [formData,setFormData]=useState(
     {
       email:'',
@@ -14,9 +17,17 @@ export default function Login(){
 
   
   const handleSubmit=(e)=>{
-    e.preventDefault();
+    if(!emailValidation(formData.email))
+    {
+      e.preventDefault();
+      setEmailWarn((prev)=>!prev);
+      
+    }
+    if(!passValidation(formData.password)){
+      e.preventDefault();
+      setPassWarn(prev=>!prev);
+    }
     console.log(formData)
-    
   }
   
   const handleChange=(e)=>{
@@ -68,6 +79,7 @@ export default function Login(){
               name="email" 
               id="email"
               placeholder="Email or username" 
+              warn={emailWarn}
               handleChange={handleChange}
               />
              
@@ -80,6 +92,7 @@ export default function Login(){
               id="password" 
               name="password"
               placeholder="Password"
+              warn={passWarn}
               handleChange={handleChange}
               />
 
@@ -98,11 +111,14 @@ export default function Login(){
 
             <hr className="w-[80%] m-6 border-t-[#292929] rounded-full "/>
 
-
+            <div className="mid-signUp">
             <span className="text-[#292929]">Don't have an account?</span>
-            <span className="underline cursor-pointer hover:text-[#1ed760]">Sign up for Vibify</span>
-
-
+            <span className="underline cursor-pointer hover:text-[#1ed760] mx-1">
+              <Link to={'/signup'}>
+              Sign up for Vibify
+              </Link>
+              </span>
+            </div>
           </div>
 
         </div>

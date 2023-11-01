@@ -5,6 +5,7 @@ import Card from './Card';
 import Player from './Player';
 import FormField from './FormField';
 import ForgetPassPage from './ForgetPassPage';
+import SignUp from "./SignUp";
 
 export {
     Home,
@@ -14,5 +15,5 @@ export {
     Card,
     FormField,
     ForgetPassPage,
-
+    SignUp,
 };

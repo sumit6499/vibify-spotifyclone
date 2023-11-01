@@ -1,12 +1,26 @@
 import React, { useState } from 'react'
 import  '../app.css'
 import { FormField } from '.'
+import { emailValidation } from '@/utils';
+
+
 function ForgetPassPage() {
 
   const [formData,setFormData]=useState('');
+  const [warning,setWarning]=useState(false);
+
+  
   const handleChange=(e)=>{
-    setFormData({...formData,[e.target.name]:e.target.value})
+    setFormData(e.target.value);
     console.log(formData)
+  }
+
+  const handleSubmit=(e)=>{
+    if(!emailValidation(formData))
+    {
+      e.preventDefault();
+      setWarning(true);
+    }
   }
   return (
    <section className='flex bg-[#121212] w-full min-h-[calc(100vh-55px)] justify-center '>
@@ -31,9 +45,10 @@ function ForgetPassPage() {
       name={'reset-pass'}
       id={'reset-pass'}
       handleChange={handleChange}
+      warn={warning}
       />
 
-      <button className='mt-4 text-sm m-auto rounded-full px-6 py-2 bg-[#1ed760] text-[#000000] font-bold'>Send</button>
+      <button className='mt-4 text-sm m-auto rounded-full px-6 py-2 bg-[#1ed760] text-[#000000] font-bold' onClick={handleSubmit}>Send</button>
     </form>
     </div>
     

@@ -1,6 +1,6 @@
 import React from 'react'
 import { logo } from './assets'
-import {ForgetPassPage, Home,Login} from './component'
+import {ForgetPassPage, Home,Login,SignUp} from './component'
 import { Routes,Route } from 'react-router-dom'
 
 export default function App() {
@@ -17,6 +17,7 @@ export default function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/password-reset' element={<ForgetPassPage/>}/>
+        <Route path='/signup' element={<SignUp/>}/>
       </Routes>
     </div>
     </>

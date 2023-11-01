@@ -1,4 +1,29 @@
-#reset-pass {
+#reset-pass,
+#signup-email {
   width: 100%;
   font-size: small;
+}
+.mid {
+  position: relative;
+}
+.mid::before {
+  content: "";
+  position: absolute;
+  display: block;
+  max-width: 43%;
+  width: 100%;
+  top: 50%;
+  height: 1px;
+  background: #878787;
+}
+.mid::after {
+  content: "";
+  position: absolute;
+  display: block;
+  max-width: 43%;
+  width: 100%;
+  top: 50%;
+  right: 0;
+  height: 1px;
+  background: #878787;
 }
