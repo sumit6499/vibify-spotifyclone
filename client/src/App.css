@@ -27,3 +27,18 @@
   height: 1px;
   background: #878787;
 }
+
+
+.music_container:hover>.playButton{
+  opacity: 1;
+  transform: translateY(-10px);
+}
+
+.musicCards::-webkit-scrollbar {
+  display: none;
+}
+
+.musicCards {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

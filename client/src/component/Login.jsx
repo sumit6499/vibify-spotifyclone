@@ -20,7 +20,7 @@ export default function Login(){
     if(!emailValidation(formData.email))
     {
       e.preventDefault();
-      setEmailWarn((prev)=>!prev);
+      setEmailWarn(prev=>!prev);
       
     }
     if(!passValidation(formData.password)){

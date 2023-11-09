@@ -1,6 +1,3 @@
-import React,{ useState} from 'react'
-
-
 
 
 function FormField({
@@ -11,8 +8,7 @@ function FormField({
   handleChange,
   warn,
 }) {
-  
-  
+
   
 
   return (
@@ -29,5 +25,7 @@ function FormField({
     </>
   )
 }
+
+
 
 export default FormField

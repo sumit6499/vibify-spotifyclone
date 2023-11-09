@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../App.css'
 import { google,facebook } from '@/assets'
 import { FormField } from '.'
 import { Link } from 'react-router-dom'
+import { emailValidation } from '@/utils'
+
 
 export default function SignUp() {
+  const [email,setEmail]=useState('');
+  const [emailWarn,setEmailWarn]=useState(false);
+
+  const handleSubmit=(e)=>{
+    if(!emailValidation(email))
+      e.preventDefault();
+      setEmailWarn(true);
+  }
+  
+  const handleChange=(e)=>{
+    setEmail(e.target.value);
+  }
   return (
     <section className='bg-[#121212] w-full min-h-[calc(100vh-55px)] flex justify-center xs:p-2 '>
         <div className="sign_up bg-transparent p-6 sm:p-4  flex flex-col xs:max-w-[300px] w-full">
@@ -19,11 +33,13 @@ export default function SignUp() {
             id={'signup-email'}
             name={'email'}
             placeholder={'name@domain.com'}
+            handleChange={handleChange}
+            warn={emailWarn}
             />
 
             <p className='mt-3 text-xs underline text-[#1ed760] cursor-pointer'>Use phone number instead. </p>
 
-            <button className='bg-[#1ed760] hover:bg-[#1abc54] w-full mt-3 rounded-full py-1 text-[#000000] font-bold transition-colors'>Next</button>
+            <button className='bg-[#1ed760] hover:bg-[#1abc54] w-full mt-3 rounded-full py-1 text-[#000000] font-bold transition-colors' onClick={handleSubmit}>Next</button>
             </form>
 
             <span className='mid mt-8 text-center font-bold text-sm '>or</span>

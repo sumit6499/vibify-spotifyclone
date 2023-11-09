@@ -1,23 +1,19 @@
 import React from 'react'
-import { logo } from './assets'
 import {ForgetPassPage, Home,Login,SignUp} from './component'
-import { Routes,Route } from 'react-router-dom'
+import { Routes,Route, useLocation } from 'react-router-dom'
+import Header from './component/Header'
 
 export default function App() {
+  let location=useLocation();
   return (
     <>
-    
-    <header  className="flex w-full bg-[#000000] items-center py-2 pl-2 ">
-    <img src={logo} alt="" className="w-10 object-contain cursor-pointer  "/>
-    <span className="text-lg font-medium tracking-wide ml-1 ">Vibify</span>
-</header>
-
     <div className="app">
+      {location.pathname!= '/' && <Header/>}
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/password-reset' element={<ForgetPassPage/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
+        <Route exact path='/' element={<Home/>}/>
+        <Route exact path='/login' element={<Login/>}/>
+        <Route exact path='/password-reset' element={<ForgetPassPage/>}/>
+        <Route exact path='/signup' element={<SignUp/>}/>
       </Routes>
     </div>
     </>
