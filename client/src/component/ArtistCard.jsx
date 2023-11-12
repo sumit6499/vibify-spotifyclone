@@ -1,7 +1,7 @@
-import React from 'react'
+
 import { artist1 } from '@/assets'
 
-function ArtistCard({data}) {
+function ArtistCard() {
   return (
     <>
     <div className='max-w-[50px] w-full h-[50px] border rounded-full object-contain overflow-hidden cursor-pointer'>
@@ -11,5 +11,6 @@ function ArtistCard({data}) {
     
   )
 }
+
 
 export default ArtistCard

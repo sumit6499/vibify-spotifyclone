@@ -13,6 +13,15 @@ import artist from './artist.png'
 import artist1 from './artist1.jpg';
 import cardImg from './cardShow.jpg';
 import playButton from './playButton.png';
+import play from './play-button.png';
+import pause from './pause.png';
+import nextSong from './nextSong.webp';
+import previousSong from './previousSong.webp';
+import random from './random.png';
+import loop from './loop.png';
+import mute from './mute.png';
+import volume from './volume.png';
+import artist2 from './artist2.jpg';
 export {
     logo,
     google,
@@ -29,4 +38,13 @@ export {
     artist1,
     cardImg,
     playButton,
+    play,
+    pause,
+    nextSong,
+    previousSong,
+    random,
+    loop,
+    mute,
+    volume,
+    artist2,
 }

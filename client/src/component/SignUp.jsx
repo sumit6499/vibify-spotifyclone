@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import '../App.css'
 import { google,facebook } from '@/assets'
 import { FormField } from '.'
@@ -44,11 +44,11 @@ export default function SignUp() {
 
             <span className='mid mt-8 text-center font-bold text-sm '>or</span>
 
-            <button className="border-white border-[0.8px] hover:border-[1.5px]  rounded-3xl  px-1 py-1.5 mt-6 m-1">
+            <button className="outline outline-[0.8px] hover:outline-[1.5px]  rounded-3xl  px-1 py-1.5 mt-6 m-1">
               <img src={google} alt='google' className="inline-block w-6  "/>
               <span className="m-6 text-sm font-bold">Continue with Google </span>
             </button>
-            <button className="border-white  border-[0.8px] hover:border-[1.5px]  rounded-3xl px-1 py-1.5 m-1 ">
+            <button className="outline  outline-[0.8px] hover:outline-[1.5px]  rounded-3xl px-1 py-1.5 m-1 ">
               <img src={facebook} alt='facebook' className="inline-block w-6 "/>
               <span className="m-4 text-sm font-bold">Continue with Facebook </span>
             </button>

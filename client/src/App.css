@@ -42,3 +42,16 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.player_animation{
+  animation: fade-up 1s ease-in-out ;
+}
+
+@keyframes fade-up {
+  to{
+    transform: translateY(0%);
+  }
+  from{
+    transform: translateY(100%);
+  }
+}

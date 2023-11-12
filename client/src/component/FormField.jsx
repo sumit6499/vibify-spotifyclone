@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types';
 
 function FormField({
   type,
@@ -8,8 +8,6 @@ function FormField({
   handleChange,
   warn,
 }) {
-
-  
 
   return (
     <>
@@ -26,6 +24,14 @@ function FormField({
   )
 }
 
+FormField.propTypes={
+  type:PropTypes.string,
+  name:PropTypes.string,
+  id:PropTypes.string,
+  placeholder:PropTypes.string,
+  handleChange:PropTypes.func,
+  warn:PropTypes.bool,
+}
 
 
 export default FormField

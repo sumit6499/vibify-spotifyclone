@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import { ArtistCard,Card } from '.'
 import {logo,home,search,room,topArtist,playlist,artist} from '../assets'
-import { FormField } from '.'
+import { FormField,Player } from '.'
 import '../App.css'
 
 const List=({links,icon})=>{
@@ -13,8 +14,6 @@ const List=({links,icon})=>{
   </div>
   )
 }
-
-
 
 const Home = () => {
 
@@ -41,11 +40,10 @@ const Home = () => {
 
   return (
     <>
-    <section className='w-full overflow-hidden h-[100vh] bg-black p-2 flex gap-2'>
-
+    <section className='relative w-full overflow-hidden h-[100vh] bg-black p-2 flex gap-2 z-0'>
      <aside className='sidebar hidden sm:flex bg-[#1a1a1a] max-w-[150px] w-full flex-col items-center rounded-md '>
         <div className="logo w-[100px] object-contain mt-8 cursor-pointer">
-          <img src={logo} alt="Vibify" className=''/>
+          <img src={logo} alt="Vibify"/>
         </div>
           <p className='text-sm text-center font-bold'>Music Streaming App</p>
         <div className="links mt-4">
@@ -67,7 +65,7 @@ const Home = () => {
         <main className='m-4 bg-[#242424] p-4 rounded-xl'>
           <h1 className='text-2xl font-extrabold'>Discover</h1>
 
-          <div className="musicCards mt-4 grid grid-col-1  place-items-center xs:grid-col-2  sm:grid-cols-3 lg:grid-col-4 gap-3 ">
+          <div className="musicCards mt-4 grid grid-cols-2  place-items-center  sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 ">
               <Card/>
               <Card/>
               <Card/>
@@ -80,16 +78,18 @@ const Home = () => {
     
       <section className='hidden sm:flex flex-col  max-w-[250px]  w-full gap-3'>
         <aside className='w-full bg-[#121212]  rounded-md'>
-          <div className='redirect_access flex justify-end items-center '>
+          <div className='redirect_access flex justify-end items-center mt-2'>
             <Link to={'/signup'}>
               <span className='mr-3 text-white hover:text-[#1ed760] hover:underline transition'>
               Sign up</span>
             </Link>
+            <div className="log_in-wrapper  flex justify-center max-w-[90px] w-full ">
             <Link to={'login'}>
-              <button className='bg-white text-black px-3 py-1 rounded-full  hover:font-semibold transition' >
+              <button className='bg-white text-black px-3 py-1 rounded-full mr-2 hover:scale-105  hover:font-semibold  ' >
                     Log in
               </button>
             </Link>
+            </div>
           </div>
             
             <div className="library flex items-center justify-center gap-1 mt-3" >
@@ -116,9 +116,7 @@ const Home = () => {
             <h2 className='text-xl text-[#878787] font-semibold'>Top Artist</h2>
           </div>
 
-          <div className="artist_content bg-[#242424] flex gap-2 justify-center p-3  flex-wrap rounded-xl">
-            <ArtistCard/>
-            <ArtistCard/>
+          <div className="artist_content  overflow bg-[#242424] flex gap-2 justify-center p-3  rounded-xl">
             <ArtistCard/>
             <ArtistCard/>
             <ArtistCard/>
@@ -127,10 +125,15 @@ const Home = () => {
 
         </aside>
       </section>
-
+      <Player/>
     </section>
     </>
   )
+}
+
+List.propTypes={
+  links:PropTypes.string,
+  icon:PropTypes.string,
 }
 
 export default Home
