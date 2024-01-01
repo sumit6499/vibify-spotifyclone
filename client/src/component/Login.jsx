@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import {useState } from "react";
 import { FormField } from "./index";
 import {emailValidation,passValidation} from '../utils';
 import {google,facebook,apple,eye,closeEye} from '../assets';
@@ -112,7 +112,7 @@ export default function Login(){
             <hr className="w-[80%] m-6 border-t-[#292929] rounded-full "/>
 
             <div className="mid-signUp">
-            <span className="text-[#292929]">Don't have an account?</span>
+            <span className="text-[#292929]">{"Don't"} have an account?</span>
             <span className="underline cursor-pointer hover:text-[#1ed760] mx-1">
               <Link to={'/signup'}>
               Sign up for Vibify

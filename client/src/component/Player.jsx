@@ -34,13 +34,14 @@ function Player() {
         <div className="img_cotainer w-10 h-10 rounded-full overflow-hidden">
           <img src={artist1} alt="card" className='object-contain animate-spin'/>
         </div>
+
         <div className="song_info ">
             <p className='text-xs font-bold'>Baby</p>
             <p className='text-xs text-[#878787]'>Justin Bieber,Ludacris</p>
         </div>
       </div>
 
-        <div className="music_container flex-col  mx-3 w-full m-4 sm:m-0 ">
+        <div className="music_container flex-col  mx-3 w-full m-4 sm:m-0 max-w-[auto]">
           <div className="img_container flex  cursor-pointer gap-10 justify-center">
           <img src={random} alt="random" className='object-contain filter invert w-5 sm:w-6 cursor-pointer '/>
             <img src={previousSong} alt="previous" className='filter invert w-5 sm:w-6 object-contain '/>
@@ -58,5 +59,4 @@ function Player() {
     </footer>
   )
 }
-
 export default Player

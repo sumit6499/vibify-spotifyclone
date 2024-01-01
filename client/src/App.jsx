@@ -1,10 +1,10 @@
-import React from 'react'
+
 import {ForgetPassPage, Home,Login,SignUp} from './component'
 import { Routes,Route, useLocation } from 'react-router-dom'
 import Header from './component/Header'
 
 export default function App() {
-  let location=useLocation();
+  let location=useLocation();  // get current page route
   return (
     <>
     <div className="app">

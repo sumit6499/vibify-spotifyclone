@@ -40,7 +40,7 @@ const Home = () => {
 
   return (
     <>
-    <section className='relative w-full overflow-hidden h-[100vh] bg-black p-2 flex gap-2 z-0'>
+    <section className='relative w-full overflow-hidden max-h-screen bg-black p-2 flex gap-2 z-0'>
      <aside className='sidebar hidden sm:flex bg-[#1a1a1a] max-w-[150px] w-full flex-col items-center rounded-md '>
         <div className="logo w-[100px] object-contain mt-8 cursor-pointer">
           <img src={logo} alt="Vibify"/>
