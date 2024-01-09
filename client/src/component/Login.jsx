@@ -51,19 +51,19 @@ export default function Login(){
           <div className="login__social flex items-center  bg-[#000000]  sm:max-w-[500px] sm:rounded-lg w-full  flex-col pb-8">
             <p className="p-8 text-3xl font-medium tracking-tight ">Log in to Vibify
             </p>
-            <button className="outline outline-[0.8px] hover:outline-[1.5px]  rounded-3xl py-1 px-8 m-1 ">
+            <button className="outline outline-[0.8px] hover:outline-2 rounded-3xl py-1 px-8 m-1 ">
               <img src={google} alt='google' className="inline-block w-6  "/>
               <span className="m-6">Continue with Google </span>
             </button>
-            <button className="outline  outline-[0.8px] hover:outline-[1.5px]  rounded-3xl py-1 px-6 m-1 ">
+            <button className="outline  outline-[0.8px] hover:outline-2  rounded-3xl py-1 px-6 m-1 ">
               <img src={facebook} alt='facebook' className="inline-block w-6 "/>
               <span className="m-6">Continue with Facebook </span>
             </button>
-            <button className="outline outline-[0.8px] hover:outline-[1.5px]  rounded-3xl py-1 px-[36px] m-1 ">
+            <button className="outline outline-[0.8px] hover:outline-2  rounded-3xl py-1 px-[36px] m-1 ">
               <img src={apple} alt='apple' className="inline-block w-6 filter brightness-200"/>
               <span className="m-6">Continue with Apple</span>
             </button>
-            <button className="outline outline-[0.8px] hover:outline-[1.5px]  rounded-3xl py-2 px-4 m-1 ">
+            <button className="outline outline-[0.8px] hover:outline-2  rounded-3xl py-2 px-4 m-1 ">
               <span className="m-6">Continue with phone number</span>
             </button>
 

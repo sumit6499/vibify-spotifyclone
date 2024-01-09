@@ -1,16 +1,20 @@
+import PropTypes from 'prop-types'
 
-import { artist1 } from '@/assets'
-
-function ArtistCard() {
+function ArtistCard({artistImg}) {
   return (
     <>
-    <div className='max-w-[50px] w-full h-[50px] border rounded-full object-contain overflow-hidden cursor-pointer'>
-      <img src={artist1} alt="" />
+    <div className='min-w-[50px] w-full h-[50px] border rounded-full object-contain overflow-hidden cursor-pointer' >
+      <img src={artistImg} alt="" />
     </div>
     </>
     
   )
 }
+
+ArtistCard.propTypes={
+  artistImg:PropTypes.string
+}
+
 
 
 export default ArtistCard

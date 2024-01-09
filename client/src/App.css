@@ -28,8 +28,7 @@
   background: #878787;
 }
 
-
-.music_container:hover>.playButton{
+.music_container:hover > .playButton {
   opacity: 1;
   transform: translateY(-10px);
 }
@@ -38,20 +37,22 @@
   display: none;
 }
 
+
+
 .musicCards {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
-.player_animation{
-  animation: fade-up 1s ease-in-out ;
+.player_animation {
+  animation: fade-up 1s ease-in-out;
 }
 
 @keyframes fade-up {
-  to{
+  to {
     transform: translateY(0%);
   }
-  from{
+  from {
     transform: translateY(100%);
   }
 }
