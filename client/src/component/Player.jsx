@@ -1,26 +1,47 @@
 import  { useState, useRef} from 'react'
 import { play,pause,nextSong,previousSong, random,loop,volume, mute} from '@/assets'
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import {togglePlayPause} from '../redux/musicApiSlice'
+import { useAuth0 } from '@auth0/auth0-react';
 
 function Player() {
 
-  const audioRef=useRef();
-  const {activeSong,url,artist}=useSelector(state=>state.players);
+  const audioRef=useRef(null);
+  const dispatch=useDispatch();
+  const {activeSong,url,artist,isPlaying}=useSelector(state=>state.players);
+  const{isAuthenticated}=useAuth0()
 
   const [music,setMusic]=useState({
     volume:50,
     songRange:0,
   });
-  const [isPlay,setIsPlay]=useState(true);
 
 
-
-  const handlePlayPause=()=>{
-    setIsPlay(prev=>!prev)
-    if(isPlay){
+  if(audioRef.current){
+    if(isPlaying){
       audioRef.current.play()
     }else{
       audioRef.current.pause();
+    }
+  }
+
+
+  const handlePlayPause=()=>{
+    if(!isAuthenticated){
+      return alert('please login')
+    }
+    if(isPlaying){
+        dispatch(
+          togglePlayPause(
+            {songStatus:false}
+          )
+      )
+    }else{
+      dispatch(
+        togglePlayPause(
+          {songStatus:true}
+          )
+        )
     }
   }
   
@@ -39,7 +60,7 @@ function Player() {
 
   return (
     
-    <footer className='absolute player_animation sm:flex  flex-1 bg-[#000000]  w-full bottom-0 p-3   items-center  z-10 min-h-[50px]  rounded-tl-lg rounded-tr-lg '  >
+    <footer className={`absolute sm:flex player_animation   flex-1 bg-[#000000]  w-full bottom-0 p-3   items-center  z-10 min-h-[50px]  rounded-tl-lg rounded-tr-lg ` } >
       <audio src={url?url:"https://cdns-preview-f.dzcdn.net/stream/c-fd9572c7a11401267a6c5c3402254160-5.mp3"} ref={audioRef}></audio>
       <div className="music_card flex gap-2 items-center w-full ">
         <div className="img_cotainer w-10 h-10 rounded-full overflow-hidden">
@@ -57,7 +78,7 @@ function Player() {
           <div className="img_container flex  cursor-pointer gap-10 justify-center">
             <img src={random} alt="random" className='object-contain filter invert w-7 cursor-pointer '/>
             <img src={previousSong} alt="previous" className='filter invert w-6 object-contain '/>
-            <img src={isPlay?play:pause} alt="play" className='filter invert hover:scale-110 object-contain w-6' onClick={handlePlayPause}/>
+            <img src={isPlaying?pause:play} alt="play" className='filter invert hover:scale-110 object-contain w-6' onClick={handlePlayPause}/>
             <img src={nextSong} alt="next" className='filter invert object-contain w-6'/>
            <img src={loop} alt="loop" className='object-contain filter invert w-7 cursor-pointer'/>
           </div>
