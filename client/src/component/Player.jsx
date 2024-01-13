@@ -3,6 +3,7 @@ import { play,pause,nextSong,previousSong, random,loop,volume, mute} from '@/ass
 import { useSelector,useDispatch } from 'react-redux';
 import {togglePlayPause} from '../redux/musicApiSlice'
 import { useAuth0 } from '@auth0/auth0-react';
+import { toast } from 'sonner'
 
 function Player() {
 
@@ -28,7 +29,7 @@ function Player() {
 
   const handlePlayPause=()=>{
     if(!isAuthenticated){
-      return alert('please login')
+      return toast.warning("Login to play music")
     }
     if(isPlaying){
         dispatch(
