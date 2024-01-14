@@ -9,7 +9,7 @@ import SignUp from "./SignUp";
 import Loader from './Loader'
 import LogOut from './LogOut'
 import Profile from './Profile'
-import PromptLogin from './PromptLogin'
+import Search from './Search'
 
 export {
     Home,
@@ -23,5 +23,5 @@ export {
     Loader,
     LogOut,
     Profile,
-    PromptLogin
+    Search
 };

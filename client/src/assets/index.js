@@ -20,6 +20,8 @@ import loop from "./loop.png";
 import mute from "./mute.png";
 import volume from "./volume.png";
 import artist from "./artist.png";
+import repeatOne from './repeatOne.png'
+import forward from './forward.png'
 
 export {
   logo,
@@ -44,4 +46,6 @@ export {
   mute,
   volume,
   artist,
+  repeatOne,
+  forward,
 };

@@ -1,11 +1,12 @@
 import '../App.css'
 import {logo,home,search,room,topArtist,playlist,artist} from '../assets'
-import { FormField,Player ,ArtistCard,Card,Loader,Login,LogOut,Profile} from '.'
-import CardSkeleton from './layout/CardSkeleton';
+import { FormField,Player ,ArtistCard,Loader,Login,LogOut,Profile,Search} from '.'
 import {  useState } from 'react'
 import {useGetAllSongsQuery} from '../redux/dezzerApi'
 import PropTypes from 'prop-types';
 import { useAuth0 } from '@auth0/auth0-react';
+import Discover from './Discover';
+import {Routes,Route, useNavigate} from 'react-router-dom'
 
 
 const List=({links,icon,handleClick})=>{
@@ -23,8 +24,17 @@ const List=({links,icon,handleClick})=>{
 const Home = () => {
   
   const [searchText,setSearchText]=useState('');
-  const {data,isFetching,isError}=useGetAllSongsQuery(searchText?searchText:'Pop');
   const {isAuthenticated,user}=useAuth0();
+  const {data,isFetching,isError}=useGetAllSongsQuery(searchText?searchText:'Pop');
+  const navigate=useNavigate();
+
+  const links=[
+    {name:'Home',icon:home,handleClick:()=>navigate('/')},
+    {name:'Search',icon:search,handleClick:()=>navigate('/search')},
+    {name:'Room',icon:room,handleClick:()=>navigate('/room')},
+    {name:'Top Artist',icon:topArtist,handleClick:()=>navigate('/artist')},
+
+  ];
 
   
   const handleChange=(e)=>{
@@ -32,19 +42,9 @@ const Home = () => {
     console.log(searchText)
   }
 
-  
-
-  const links=[
-    {name:'Home',icon:home},
-    {name:'Search',icon:search},
-    {name:'Room',icon:room},
-    {name:'Top Artist',icon:topArtist},
-
-  ];
-
-  const linksList=links.map(({name,icon},index)=>{
+  const linksList=links.map(({name,icon,handleClick},index)=>{
   return <li key={index} className='list-none text-[#878787] font-semibold transition hover:text-[#1ed760] cursor-pointer '>
-    <List links={name} icon={icon} /></li>
+    <List links={name} icon={icon} handleClick={handleClick}/></li>
   })
 
 
@@ -63,25 +63,24 @@ const Home = () => {
         </div>
      </aside>
   
-     <section className="musicCards bg-[#121212]  w-full p-2 rounded-md overflow-y-auto ">
-        <div className="search flex justify-center" >
+     <section className="musicCards bg-[#121212]  w-full p-2 rounded-md  overflow-y-auto ">
+        <div className="search flex gap-3 items-center sm:justify-center" >
         <FormField 
         type={'text'}
         name={'search'}
         id={'searchField'}
-        placeholder={'Search songs'}
+        placeholder={'Search Songs/Genres/Artist'}
         handleChange={handleChange}
         />
+        <div className='block sm:hidden'>
+        {!isAuthenticated&&(<Login classes={'bg-white text-black text-sm  px-1 py-1 rounded-full mr-2 '}/>)}
         </div>
-
+        </div>
         <main className='m-4 bg-[#242424] p-4 rounded-xl'>
-          <h1 className='text-2xl font-extrabold'>Discover</h1>
-
-          <div className="musicCards mt-4 grid grid-cols-2 min-h-screen place-items-center  sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 ">
-            {isFetching&&[1,2,3,4,5,6,7,8,9,10].map((data)=><CardSkeleton key={data}/>)}
-            {data&&data.data.map((data,index)=><Card key={index} artists={data.artist.name} title={data.album.title} artistImg={data.artist.picture_medium}  song={data.preview}/>)}
-            {isError&&'error occured'}
-          </div>
+          <Routes>
+              <Route exact path='/' element={<Discover searchText={searchText}/>}/>
+              <Route exact path='/search' element={<Search data={data} isFetching={isFetching} searchText={searchText} isError={isError}/>}/>
+          </Routes>
         </main>
      </section>
     
