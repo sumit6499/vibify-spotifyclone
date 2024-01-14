@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import {store} from './redux/store.js'
 import {Provider} from 'react-redux'
 import { Auth0Provider } from '@auth0/auth0-react'
-
+import { Toaster } from 'sonner'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Auth0Provider 
@@ -18,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
     <BrowserRouter>
       <App />
+      <Toaster position='top-center' />
     </BrowserRouter>
     </Provider>
     </Auth0Provider>

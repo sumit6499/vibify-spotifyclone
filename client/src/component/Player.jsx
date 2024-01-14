@@ -3,7 +3,6 @@ import { play,pause,nextSong,previousSong, random,loop,volume, mute,repeatOne,fo
 import { useSelector,useDispatch } from 'react-redux';
 import {togglePlayPause} from '../redux/musicApiSlice'
 import { useAuth0 } from '@auth0/auth0-react';
-import {getMinuteSecond} from '../utils'
 
 function Player() {
 
@@ -53,9 +52,9 @@ function Player() {
 
 
   const handlePlayPause=()=>{
-    // if(!isAuthenticated){
-    //   return alert('please login')
-    // }
+    if(!isAuthenticated){
+      return alert('please login')
+    }
     if(isPlaying){
         dispatch(
           togglePlayPause(
