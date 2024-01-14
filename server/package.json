@@ -4,8 +4,15 @@
   "description": "This is backend of vibify webapp stack(MERN)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "build": "node index.js"
   },
   "author": "Sumit Padalkar",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "netlify-lambda": "^2.0.16",
+    "serverless-http": "^3.2.0"
+  }
 }

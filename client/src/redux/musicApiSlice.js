@@ -19,7 +19,11 @@ export const PlayerSlice = createSlice({
       state.artist.image = action.payload.image;
       state.artist.artistName = action.payload.artistName;
     },
+
+    togglePlayPause: (state, action) => {
+      state.isPlaying = action.payload.songStatus;
+    },
   },
 });
-export const { addPlaySong } = PlayerSlice.actions;
+export const { addPlaySong, togglePlayPause } = PlayerSlice.actions;
 export default PlayerSlice.reducer;

@@ -9,6 +9,8 @@ function FormField({
   warn,
 }) {
 
+
+
   return (
     <>
     <input 
@@ -31,6 +33,10 @@ FormField.propTypes={
   placeholder:PropTypes.string,
   handleChange:PropTypes.func,
   warn:PropTypes.bool,
+  refProp:PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({current:PropTypes.any})
+  ])
 }
 
 

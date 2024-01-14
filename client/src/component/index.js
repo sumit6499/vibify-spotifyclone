@@ -6,6 +6,10 @@ import Player from './Player';
 import FormField from './FormField';
 import ForgetPassPage from './ForgetPassPage';
 import SignUp from "./SignUp";
+import Loader from './Loader'
+import LogOut from './LogOut'
+import Profile from './Profile'
+import Search from './Search'
 
 export {
     Home,
@@ -16,4 +20,8 @@ export {
     FormField,
     ForgetPassPage,
     SignUp,
+    Loader,
+    LogOut,
+    Profile,
+    Search
 };

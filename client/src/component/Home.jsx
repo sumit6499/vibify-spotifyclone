@@ -1,16 +1,17 @@
-import {  useState } from 'react'
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
-import { ArtistCard,Card } from '.'
-import {logo,home,search,room,topArtist,playlist,artist} from '../assets'
-import { FormField,Player } from '.'
 import '../App.css'
+import {logo,home,search,room,topArtist,playlist,artist} from '../assets'
+import { FormField,Player ,ArtistCard,Loader,Login,LogOut,Profile,Search} from '.'
+import {  useState } from 'react'
 import {useGetAllSongsQuery} from '../redux/dezzerApi'
+import PropTypes from 'prop-types';
+import { useAuth0 } from '@auth0/auth0-react';
+import Discover from './Discover';
+import {Routes,Route, useNavigate} from 'react-router-dom'
 
 
-const List=({links,icon})=>{
+const List=({links,icon,handleClick})=>{
   return(
-  <div className="flex capitalize items-center gap-2 m-4 ">
+    <div className="flex capitalize items-center gap-2 m-4 " onClick={handleClick}>
     <img src={icon} alt="" className='w-6 filter invert '/>
     {links}
   </div>
@@ -23,35 +24,32 @@ const List=({links,icon})=>{
 const Home = () => {
   
   const [searchText,setSearchText]=useState('');
+  const {isAuthenticated,user}=useAuth0();
   const {data,isFetching,isError}=useGetAllSongsQuery(searchText?searchText:'Pop');
- 
+  const navigate=useNavigate();
 
+  const links=[
+    {name:'Home',icon:home,handleClick:()=>navigate('/')},
+    {name:'Search',icon:search,handleClick:()=>navigate('/search')},
+    {name:'Room',icon:room,handleClick:()=>navigate('/room')},
+    {name:'Top Artist',icon:topArtist,handleClick:()=>navigate('/artist')},
 
+  ];
+
+  
   const handleChange=(e)=>{
     setSearchText(e.target.value);
     console.log(searchText)
   }
 
-
-
-  const links=[
-    {name:'Home',icon:home},
-    {name:'Search',icon:search},
-    {name:'Room',icon:room},
-    {name:'Top Artist',icon:topArtist},
-
-  ];
-
-  const linksList=links.map(({name,icon},index)=>{
+  const linksList=links.map(({name,icon,handleClick},index)=>{
   return <li key={index} className='list-none text-[#878787] font-semibold transition hover:text-[#1ed760] cursor-pointer '>
-    <List links={name} icon={icon} /></li>
+    <List links={name} icon={icon} handleClick={handleClick}/></li>
   })
 
 
-
   
-
-
+  
   return (
     <>
     <section className='relative w-full overflow-hidden max-h-screen sm:min-h-screen bg-black p-2 flex gap-2 z-0'>
@@ -65,41 +63,35 @@ const Home = () => {
         </div>
      </aside>
   
-     <section className="musicCards bg-[#121212]  w-full p-2 rounded-md overflow-y-auto ">
-        <div className="search flex justify-center">
+     <section className="musicCards bg-[#121212]  w-full p-2 rounded-md  overflow-y-auto ">
+        <div className="search flex gap-3 items-center sm:justify-center" >
         <FormField 
         type={'text'}
         name={'search'}
         id={'searchField'}
-        placeholder={'Search songs'}
+        placeholder={'Search Songs/Genres/Artist'}
         handleChange={handleChange}
         />
+        <div className='block sm:hidden'>
+        {!isAuthenticated&&(<Login classes={'bg-white text-black text-sm  px-1 py-1 rounded-full mr-2 '}/>)}
         </div>
-
+        </div>
         <main className='m-4 bg-[#242424] p-4 rounded-xl'>
-          <h1 className='text-2xl font-extrabold'>Discover</h1>
-
-          <div className="musicCards mt-4 grid grid-cols-2  place-items-center  sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 ">
-            {isFetching&&'Loading...'}
-            {data&&data.data.map((data,index)=><Card key={index} artists={data.artist.name} title={data.album.title} artistImg={data.artist.picture_medium}  song={data.preview}/>)}
-            {isError&&'error occured'}
-          </div>
+          <Routes>
+              <Route exact path='/' element={<Discover searchText={searchText}/>}/>
+              <Route exact path='/search' element={<Search data={data} isFetching={isFetching} searchText={searchText} isError={isError}/>}/>
+          </Routes>
         </main>
      </section>
     
       <section className='hidden md:flex flex-col  max-w-[250px]  w-full gap-3'>
         <aside className='w-full bg-[#121212]  rounded-md'>
-          <div className='redirect_access flex justify-end items-center mt-2'>
-            <Link to={'/signup'}>
-              <span className='mr-3 text-white hover:text-[#1ed760] hover:underline transition'>
-              Sign up</span>
-            </Link>
+          <div className='redirect_access flex justify-end items-center mt-2 '>
+              <div className='mr-3 text-white hover:text-[#1ed760] hover:underline transition'>
+              {isAuthenticated&&<Profile avatar={user.picture}/>}</div>
             <div className="log_in-wrapper  flex justify-center max-w-[90px] w-full ">
-            <Link to={'/login'}>
-              <button className='bg-white text-black px-3 py-1 rounded-full mr-2 hover:scale-105  hover:font-semibold  ' >
-                    Log in
-              </button>
-            </Link>
+              {!isAuthenticated&&(<Login classes={'bg-white text-black px-3 py-1 rounded-full mr-2 hover:scale-105  hover:font-semibold  '}/>)}
+              {isAuthenticated&&<LogOut/>}
             </div>
           </div>
             
@@ -128,12 +120,13 @@ const Home = () => {
           </div>
 
           <div className="artist_content overflow-x-scroll bg-[#242424] flex gap-2 justify-center p-3  rounded-xl border">
-          {isFetching&&'Loading...'}
+          {isFetching&&<Loader/>}
           {data&&data.data.map((data,index)=><ArtistCard key={index} artistImg={data.artist.picture_medium} />)}
           </div>
 
         </aside>
       </section>
+
       <Player/>
     </section>
     </>
@@ -143,6 +136,7 @@ const Home = () => {
 List.propTypes={
   links:PropTypes.string,
   icon:PropTypes.string,
+  handleClick:PropTypes.func,
 }
 
 export default Home
