@@ -1,17 +1,17 @@
 import '../App.css'
-import {logo,home,search,room,topArtist,playlist,artist} from '../assets'
+import {logo,home,search,room,topArtist,playlist,artist,menu,cross} from '../assets'
 import { FormField,Player ,ArtistCard,Loader,Login,LogOut,Profile,Search} from '.'
 import {  useState } from 'react'
 import {useGetAllSongsQuery} from '../redux/dezzerApi'
 import PropTypes from 'prop-types';
 import { useAuth0 } from '@auth0/auth0-react';
 import Discover from './Discover';
-import {Routes,Route, useNavigate} from 'react-router-dom'
+import {Routes,Route,useLocation,NavLink} from 'react-router-dom'
 
 
 const List=({links,icon,handleClick})=>{
   return(
-    <div className="flex capitalize items-center gap-2 m-4 " onClick={handleClick}>
+    <div className="flex capitalize items-center gap-2 py-1.5  m-4 " onClick={handleClick}>
     <img src={icon} alt="" className='w-6 filter invert '/>
     {links}
   </div>
@@ -24,47 +24,87 @@ const List=({links,icon,handleClick})=>{
 const Home = () => {
   
   const [searchText,setSearchText]=useState('');
+  const [expanded,setExpanded]=useState(false);
   const {isAuthenticated,user}=useAuth0();
   const {data,isFetching,isError}=useGetAllSongsQuery(searchText?searchText:'Pop');
-  const navigate=useNavigate();
+  const location=useLocation();
+
 
   const links=[
-    {name:'Home',icon:home,handleClick:()=>navigate('/')},
-    {name:'Search',icon:search,handleClick:()=>navigate('/search')},
-    {name:'Room',icon:room,handleClick:()=>navigate('/room')},
-    {name:'Top Artist',icon:topArtist,handleClick:()=>navigate('/artist')},
+    {name:'Home',to:'/',icon:home},
+    {name:'Search',to:'/search',icon:search},
+    {name:'Room',to:'/room',icon:room},
+    {name:'Top Artist',to:'/artist',icon:topArtist},
 
   ];
 
   
   const handleChange=(e)=>{
     setSearchText(e.target.value);
-    console.log(searchText)
   }
 
-  const linksList=links.map(({name,icon,handleClick},index)=>{
-  return <li key={index} className='list-none text-[#878787] font-semibold transition hover:text-[#1ed760] cursor-pointer '>
-    <List links={name} icon={icon} handleClick={handleClick}/></li>
-  })
+  const handleMenuBar=()=>{
+    setExpanded(prev=>!prev)
+  }
 
+  const linksList=links.map(({name,icon,to},index)=>{
+  return( 
+    <NavLink 
+      to={to} 
+      key={index}
+    >
+      <li className={`list-none   font-semibold transition sm:hover:text-[#1ed760] cursor-pointer text-white  rounded-md hover:bg-[#1a1a1a] ${location.pathname===to?'bg-[#1a1a1a] sm:text-[#1ed760]':''}`}>
+        <List links={name} icon={icon} />
+      </li>
+    </NavLink>
+  )
+  })
 
   
   
   return (
     <>
-    <section className='relative w-full overflow-hidden max-h-screen sm:min-h-screen bg-black p-2 flex gap-2 z-0'>
-     <aside className='sidebar hidden sm:flex bg-[#1a1a1a] max-w-[150px] w-full flex-col items-center rounded-md '>
-        <div className="logo w-[100px] object-contain mt-8 cursor-pointer">
+    <section className='relative w-full overflow-hidden max-h-[100dvh] bg-black p-2 flex gap-2 z-0'>
+     <aside className={`sidebar absolute sm:relative flex z-10 sm:z-0  bg-[#000000] sm:bg-[#1a1a1a] min-w-[180px]  min-h-screen flex-col items-center rounded-md transition-all  px-4 ${expanded?'fade-in sm:animate-none ml-[0px] sm:m-0 ':'fade-out sm:animate-none ml-[-399px] sm:m-0'} gap-4`}>
+
+        <div className="sidebar_closer sm:hidden w-10 object-contain ml-44 hover:cursor-pointer" onClick={()=>setExpanded(prev=>!prev)}>
+          <img src={cross} alt="" className='invert '/>
+        </div>
+
+        <div className="logo w-[100px] object-contain  cursor-pointer ">
           <img src={logo} alt="Vibify"/>
         </div>
+
           <p className='text-sm text-center font-bold'>Music Streaming App</p>
-        <div className="links mt-4">
+        <div className="links mt-4 w-full sm:p-0">
           {linksList}
+        </div>
+          {isAuthenticated&&(
+               <div className="user-info mt-16 w-full p-3 flex sm:hidden bg-[#1a1a1a] gap-2 rounded-xl  ">
+               <img src={user.picture} alt="user" className='w-10 h-10 rounded-full'/>
+               <div className="">
+                 <span className='font-semibold'>{isAuthenticated?user.name:''}</span>
+                 <p className='text-sm '>{isAuthenticated?user.email:''}</p>
+               </div>
+           </div>
+          )}
+        
+        
+        <div className="login sm:hidden w-full ">
+          {isAuthenticated?
+            <LogOut className={'text-black bg-white border hover:scale-105  hover:font-semibold w-full py-1.5 ' }/>
+            : <Login classes={'text-black bg-white border hover:scale-105  hover:font-semibold w-full py-1.5  ' }/>
+          }
         </div>
      </aside>
   
-     <section className="musicCards bg-[#121212]  w-full p-2 rounded-md  overflow-y-auto ">
-        <div className="search flex gap-3 items-center sm:justify-center" >
+     <section className="musicCards  bg-[#121212]  w-full p-2 rounded-md  overflow-y-auto ">
+        <div className="search flex gap-6 items-center  sm:justify-center" >
+        <div className='block sm:hidden'>
+          <div className="menu_container hover:cursor-pointer" onClick={handleMenuBar}>
+            <img src={menu} alt="" className='invert p-0.5 '/>
+          </div>
+        </div>
         <FormField 
         type={'text'}
         name={'search'}
@@ -72,9 +112,6 @@ const Home = () => {
         placeholder={'Search Songs/Genres/Artist'}
         handleChange={handleChange}
         />
-        <div className='block sm:hidden'>
-        {!isAuthenticated&&(<Login classes={'bg-white text-black text-sm  px-1 py-1 rounded-full mr-2 '}/>)}
-        </div>
         </div>
         <main className='m-4 bg-[#242424] p-4 rounded-xl'>
           <Routes>
@@ -91,7 +128,7 @@ const Home = () => {
               {isAuthenticated&&<Profile avatar={user.picture}/>}</div>
             <div className="log_in-wrapper  flex justify-center max-w-[90px] w-full ">
               {!isAuthenticated&&(<Login classes={'bg-white text-black px-3 py-1 rounded-full mr-2 hover:scale-105  hover:font-semibold  '}/>)}
-              {isAuthenticated&&<LogOut/>}
+              {isAuthenticated&&<LogOut  className={'bg-white text-black px-3 py-1 rounded-full mr-1 hover:font-semibold hover:scale-105 ' }/>}
             </div>
           </div>
             

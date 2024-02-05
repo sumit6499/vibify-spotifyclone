@@ -1,3 +1,4 @@
+
 #reset-pass,
 #signup-email {
   width: 100%;
@@ -37,15 +38,24 @@
   display: none;
 }
 
-
-
 .musicCards {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 
+.fade-in{
+  animation: fade-in 2s cubic-bezier(0.075, 0.82, 0.165, 1) ;
+}
+.fade-out{
+  animation: fade-out 2s cubic-bezier(0.075, 0.82, 0.165, 1) ;
+}
+
 .player_animation {
   animation: fade-up 1s ease-in-out;
+}
+
+.active{
+  background-color: #1a1a1a;
 }
 
 @keyframes fade-up {
@@ -54,5 +64,21 @@
   }
   from {
     transform: translateY(100%);
+  }
+}
+@keyframes fade-in {
+  from {
+    margin-left: -399px;
+  }
+  to {
+    margin-left: 0px;
+  }
+}
+@keyframes fade-out {
+  from {
+    margin-left: 0px;
+  }
+  to {
+    margin-left: -399px;
   }
 }

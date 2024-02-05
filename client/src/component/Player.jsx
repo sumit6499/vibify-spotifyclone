@@ -99,7 +99,7 @@ function Player() {
 
   return (
     
-    <footer className={`absolute sm:flex player_animation   flex-1 bg-[#000000]  w-full bottom-0 p-3   items-center  z-10 min-h-[50px]  rounded-tl-lg rounded-tr-lg ` } >
+    <footer className={`absolute sm:flex player_animation  flex-1 bg-[#000000]  w-full bottom-0 p-3   items-center  z-2 min-h-[50px]  rounded-tl-lg rounded-tr-lg  sm:m-0` } >
       <audio 
         src={url?url:"https://cdns-preview-f.dzcdn.net/stream/c-fd9572c7a11401267a6c5c3402254160-5.mp3"}
         onTimeUpdate={()=>setValue(audioRef.current.currentTime)}
@@ -119,7 +119,7 @@ function Player() {
         </div>
       </div>
 
-        <div className="music_container  flex-col mx-0 sm:mx-3 w-full m-4 sm:m-0 max-w-[auto]">
+        <div className="music_container  flex-col  mx-0 sm:mx-3 w-full m-4 sm:m-0 max-w-[auto]">
 
           <div className="img_container flex  cursor-pointer gap-10 justify-center">
             <img src={random} alt="random" className='object-contain filter invert w-7 cursor-pointer '/>

@@ -22,6 +22,8 @@ import volume from "./volume.png";
 import artist from "./artist.png";
 import repeatOne from './repeatOne.png'
 import forward from './forward.png'
+import cross from './cross.png'
+import menu from './menu.png'
 
 export {
   logo,
@@ -48,4 +50,6 @@ export {
   artist,
   repeatOne,
   forward,
+  cross,
+  menu,
 };

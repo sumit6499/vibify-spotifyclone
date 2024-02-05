@@ -10,8 +10,8 @@ import { Toaster } from 'sonner'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Auth0Provider 
-      domain='dev-a7gb80jyjc71la60.us.auth0.com'
-      clientId='m0bfOLDUXtr5QT3YVvLWhDyMC7y6dSGX'
+      domain={import.meta.env.VITE_AUTH0_DOMAIN}
+      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
       authorizationParams={{
         redirect_uri: window.location.origin
       }}>
