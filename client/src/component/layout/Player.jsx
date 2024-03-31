@@ -1,10 +1,10 @@
 import  { useState, useRef, useEffect} from 'react'
 import { play,pause, random,loop,volume, mute,repeatOne,forward} from '@/assets'
 import { useSelector,useDispatch } from 'react-redux';
-import {togglePlayPause} from '../redux/musicApiSlice'
+import {togglePlayPause} from '../../redux/musicApiSlice'
 import { useAuth0 } from '@auth0/auth0-react';
 import { toast } from 'sonner'
-import {getMinuteSecond} from '../utils/getMinuteSecond'
+import {getMinuteSecond} from '../../utils/getMinuteSecond'
 
 function Player() {
 
@@ -114,7 +114,7 @@ function Player() {
         </div>
 
         <div className="song_info ">
-            <p className='text-xs font-bold'>{activeSong?activeSong:'Baby'}</p>
+            <p className='text-white text-xs font-bold'>{activeSong?activeSong:'Baby'}</p>
             <p className='text-xs text-[#878787]'>{artist.artistName?artist.artistName:"Justin Bieber,Ludacris"}</p>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import CardSkeleton from './layout/CardSkeleton';
+import CardSkeleton from '../layout/CardSkeleton';
 import { Card } from '.';
 import PropTypes from 'prop-types'
 

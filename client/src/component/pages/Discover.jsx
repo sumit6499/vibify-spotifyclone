@@ -1,5 +1,5 @@
-import {useGetAllSongsQuery} from '../redux/dezzerApi'
-import CardSkeleton from './layout/CardSkeleton';
+import {useGetAllSongsQuery} from '../../redux/dezzerApi'
+import CardSkeleton from '../layout/CardSkeleton';
 import { Card } from '.';
 import PropTypes from 'prop-types'
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import  '../app.css'
+import  '@/app.css'
 import { FormField } from '.'
 import { emailValidation } from '@/utils';
 

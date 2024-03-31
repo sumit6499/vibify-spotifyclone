@@ -1,7 +1,7 @@
 
-import {ForgetPassPage, Home,Login,SignUp} from './component'
+import {ForgetPassPage, Home,Login,SignUp} from './component/pages'
 import { Routes,Route } from 'react-router-dom'
-import Header from './component/Header'
+import Header from './component/layout/Header'
 
 export default function App() {
   return (

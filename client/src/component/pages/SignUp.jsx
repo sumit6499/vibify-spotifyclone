@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import '../App.css'
+import '@/App.css'
 import { google,facebook } from '@/assets'
 import { FormField } from '.'
 import { Link } from 'react-router-dom'

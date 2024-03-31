@@ -1,4 +1,5 @@
-import '../Loader.css'
+import './Css/Loader.css'
+
 function loader() {
   return (
     <div>

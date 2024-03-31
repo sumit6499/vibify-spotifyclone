@@ -1,12 +1,13 @@
-import '../App.css'
-import {logo,home,search,room,topArtist,playlist,artist,menu,cross} from '../assets'
+import '@/App.css'
+import {logo,home,search,room,topArtist,playlist,artist,menu,cross} from '../../assets'
 import { FormField,Player ,ArtistCard,Loader,Login,LogOut,Profile,Search} from '.'
 import {  useState } from 'react'
-import {useGetAllSongsQuery} from '../redux/dezzerApi'
+import {useGetAllSongsQuery} from '../../redux/dezzerApi'
 import PropTypes from 'prop-types';
 import { useAuth0 } from '@auth0/auth0-react';
 import Discover from './Discover';
 import {Routes,Route,useLocation,NavLink} from 'react-router-dom'
+import Room from './Room'
 
 
 const List=({links,icon,handleClick})=>{
@@ -75,7 +76,7 @@ const Home = () => {
           <img src={logo} alt="Vibify"/>
         </div>
 
-          <p className='text-sm text-center font-bold'>Music Streaming App</p>
+          <p className='text-white text-sm text-center font-bold'>Music Streaming App</p>
         <div className="links mt-4 w-full sm:p-0">
           {linksList}
         </div>
@@ -117,6 +118,8 @@ const Home = () => {
           <Routes>
               <Route exact path='/' element={<Discover searchText={searchText}/>}/>
               <Route exact path='/search' element={<Search data={data} isFetching={isFetching} searchText={searchText} isError={isError}/>}/>
+              <Route exact path='/room' element={<Room/>}/>
+              <Route  path='/room/:roomId' />
           </Routes>
         </main>
      </section>
@@ -137,7 +140,7 @@ const Home = () => {
             <h2 className='text-[#878787] inline-block font-semibold '>Your Library</h2>
             </div>
             <div className="playlist m-2 bg-[#242424] p-3 rounded-lg">
-              <p className='text-center'>Your Playlists</p>
+              <p className='text-white text-center'>Your Playlists</p>
               <div className="w-full bg-white rounded-md">
                 <p className='text-black text-center m-3'>🖤 Favourite Songs</p>
               </div>

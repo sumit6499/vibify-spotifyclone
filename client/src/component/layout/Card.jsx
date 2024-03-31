@@ -1,7 +1,7 @@
 import { useDispatch} from 'react-redux'
-import '../App.css'
+import '@/App.css'
 import { playButton } from '@/assets'
-import {addPlaySong, togglePlayPause} from '../redux/musicApiSlice'
+import {addPlaySong, togglePlayPause} from '../../redux/musicApiSlice'
 import PropTypes from 'prop-types'
 
 
